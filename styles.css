@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .question-box {
+    margin-top: 20px;
+  }
+  
+  .question {
+    font-weight: bold;
+  }
+  
+  form {
+    text-align: left;
+  }
+  
+  form label,
+  form input,
+  form select,
+  form textarea {
+    margin-bottom: 10px;
+  }
+
+  form button {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    display: none; /* Hide initially */
+  }
+  

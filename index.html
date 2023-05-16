@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="./App.js"></script>
-  </body>
+
+<head>
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+
+    <div id="popup" class="popup">
+        <p>This is a pop-up message!</p>
+    </div>
+
+    <div class="container">
+        <h1>Quiz</h1>
+        <div class="question-box">
+
+            <div id="question-container">
+                <form id="quiz-form">
+                    <!-- Question will be dynamically inserted here -->
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+
 </html>
