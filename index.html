@@ -9,17 +9,25 @@
 <body>
 
     <div id="popup" class="popup">
-        <p>This is a pop-up message!</p>
+        <p class="title">This is a pop-up message!</p>
+        <p class="message"></p>
     </div>
+    <div id="blur-background" class="blur-background"></div>
+
 
     <div class="container">
         <h1>Quiz</h1>
         <div class="question-box">
 
             <div id="question-container">
+                <p id="question-counter"></p>
+
                 <form id="quiz-form">
                     <!-- Question will be dynamically inserted here -->
                 </form>
+
+                <p id="score-counter">Score = 0</p>
+
             </div>
 
         </div>
