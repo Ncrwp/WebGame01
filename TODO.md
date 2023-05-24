@@ -5,4 +5,5 @@
 - [*] Keep track of the user's score and display the number of incorrect answers at the end of each round.
 - [*] Show the correct answer when the user selects an incorrect option.
 - [ ] End of game message and options.
+- [ ] Landing page.
 

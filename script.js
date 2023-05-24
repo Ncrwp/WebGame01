@@ -15,18 +15,26 @@ function hidePopup() {
 }
 
 window.addEventListener("load", async function () {
-  let apiUrl =
+  var apiUrl =
     "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
+  var loadingIndicator = document.getElementById("loading-indicator");
 
   try {
-    let response = await fetch(apiUrl);
-    let data = await response.json();
+    // Show the loading indicator
+    loadingIndicator.style.display = "block";
+
+    var response = await fetch(apiUrl);
+    var data = await response.json();
 
     handleQuizData(data);
+
+    // Hide the loading indicator
+    loadingIndicator.style.display = "none";
   } catch (error) {
     console.log("An error occurred:", error);
   }
 });
+
 
 function createQuestion(question, answers, currentIndex, totalQuestions) {
 
@@ -67,14 +75,6 @@ function createQuestion(question, answers, currentIndex, totalQuestions) {
     // Append answer item to the form
     quizForm.appendChild(answerItem);
   });
-
-      // Create the submit button
-      let submitButton = document.createElement("button");
-      submitButton.type = "submit";
-      submitButton.innerHTML = "Submit";
-  
-      // Append submit button to the form
-      quizForm.appendChild(submitButton);
 }
 
 function createQuestionElement(question) {
@@ -102,21 +102,14 @@ function handleQuizData(response) {
 
 
     // Add submit event listener to the form
-    quizForm.addEventListener("submit", function (event) {
+    var submitButton = document.getElementById("submit-button");
+
+    submitButton.addEventListener("click", function(event) {
       event.preventDefault();
-
-      let selectedAnswer = document.querySelector(
-        'input[name="answer"]:checked'
-      ).value;
-
-      // Create result object
-      let result = {
-        question: question,
-        selectedAnswer: selectedAnswer,
-      };
-
+    
+      var selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+    
       handleAnswerSubmission(response);
-
     });
   }
 }
@@ -134,7 +127,7 @@ function handleAnswerSubmission(response) {
   if (selectedAnswer == response.results[currentQuestionIndex]["correct_answer"]) {
     // Correct answer
     showPopup("Correct!","");
-    score.innerHTML = "Score = "+ currentScore++
+    score.innerHTML = "Points "+ currentScore++
 
   } else {
     // Incorrect answer

@@ -12,18 +12,71 @@ body {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    height: 60vh; /* Set a minimum height */
+    width: 75vh; /* Set a minimum height */
+
+    box-sizing: border-box; /* Include padding in the total size */
+    overflow: hidden; /* Limit the size of the content */
   }
   
-  .question-box {
-    margin-top: 20px;
+  @media screen and (max-width: 768px) {
+    /* Adjust the container size for smaller screens */
+    .container {
+      min-height: 150px;
+      min-width: 150px;
+
+      padding: 10px;
+    }
   }
+  
+  #question-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    box-sizing: border-box; /* Include padding in the total size */
+    overflow: hidden; /* Limit the size of the content */
+  }
+
+
+  #loading-indicator {
+    display: none;
+    width: 50px;
+    height: 50px;
+    margin: 16px auto;
+    border: 5px solid #ccc;
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
   
   .question {
     font-weight: bold;
+    margin: 16px auto;
+    width: auto;
+
   }
   
   form {
     text-align: left;
+    height: 100%;
+    padding-top: 16px;
   }
   
   form label,
@@ -33,10 +86,22 @@ body {
     margin-bottom: 10px;
   }
 
-  form button {
-    display: block;
+  #submit-button {
+    width: fit-content;
     margin: 0 auto;
   }
+
+  #score-counter {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 75%;
+  }
+  
 
   .popup {
     /* Your existing styles for the popup */
