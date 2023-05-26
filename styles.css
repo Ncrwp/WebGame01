@@ -44,28 +44,6 @@ body {
     overflow: hidden; /* Limit the size of the content */
   }
 
-
-  #loading-indicator {
-    display: none;
-    width: 50px;
-    height: 50px;
-    margin: 16px auto;
-    border: 5px solid #ccc;
-    border-top-color: #000;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  
   .question {
     font-weight: bold;
     margin: 16px auto;
@@ -130,4 +108,31 @@ body {
     display: none; /* Hide initially */
   }
   
+  #loading-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #ffffff;
+  }
   
+  .loading-spinner {
+    border: 8px solid #ffffff;
+    border-top: 8px solid #000;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-text {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+  }
