@@ -1,35 +1,57 @@
-import { GameHtml } from './scenes/Game/GameHTML.js';
-import { GameScript } from './scenes/Game/GameScript.js';
+import { GameScript } from "./scenes/Game/GameScript.js";
+import { MenuScript } from "./scenes/Menu/MenuScript.js";
 
-let url = "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
+const gameScript = new GameScript();
 
-const gameUi = new GameHtml();
-gameUi.insertHtml()
+let apiUrl = "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
 
-const game = new GameScript("question-container", "quiz-form", "question-counter", "submit-button", "score-counter");
-
-
-window.addEventListener("load", async function () {
-
-  var apiUrl =
-    "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
-
+async function handleRequest() {
   try {
-
     var response = await fetch(apiUrl);
     var data = await response.json();
 
-    game.handleQuizData(data);
-
-    
+    return await data;
   } catch (error) {
     console.log("An error occurred:", error);
   }
+}
 
+
+window.addEventListener("load", function () {
+
+    switchToMenuPage()
+
+  });
+
+  function switchToMenuPage(){
+    const menuScript = new MenuScript();
+
+    menuScript.LoadMenuPage();
   
-});
+    const startButton = document.getElementById("start-button");
+  
+    startButton.addEventListener("click", switchToGamePage);
+  }
+
+async function switchToGamePage() {
+    
+  gameScript.LoadGamePage();
+  gameScript.handleQuizData(await handleRequest());
+
+  const home = document.getElementById("home-button");
+  home.addEventListener("click", function () {
+    switchToMenuPage();
+  });
 
 
+  const next = document.getElementById("next-button");
+  next.addEventListener("click", function(){
+    console.log("Test")
+    
+    gameScript.handleAnswerSubmission(null ,'Skip');
+  });
 
+
+}
 
 

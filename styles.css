@@ -9,7 +9,6 @@ body {
   
   .container {
     background-color: #ffffff;
-    padding: 20px;
     border-radius: 10px;
     text-align: center;
     display: flex;
@@ -23,6 +22,56 @@ body {
     box-sizing: border-box; /* Include padding in the total size */
     overflow: hidden; /* Limit the size of the content */
   }
+
+  .page {
+    display: none;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    height: 60vh; /* Set a minimum height */
+    width: 75vh; /* Set a minimum height */
+
+    box-sizing: border-box; /* Include padding in the total size */
+    overflow: hidden; /* Limit the size of the content */
+  }
+
+.slide-in {
+  display: flex;
+  animation: slide-in 1s ease-in-out;
+}
+
+.slide-out {
+  display: flex;
+  animation: slide-out 1s ease-in-out;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
   
   @media screen and (max-width: 768px) {
     /* Adjust the container size for smaller screens */
@@ -135,4 +184,20 @@ body {
     margin-top: 10px;
     font-weight: bold;
     color: #333;
+  }
+  
+  .button-container {
+    margin-right: 10px;
+  }
+  
+  .heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .heading-title {
+    width: 100%;
   }
