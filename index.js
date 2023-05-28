@@ -3,7 +3,8 @@ import { MenuScript } from "./scenes/Menu/MenuScript.js";
 
 const gameScript = new GameScript();
 
-let apiUrl = "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
+let apiUrl =
+  "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
 
 async function handleRequest() {
   try {
@@ -16,25 +17,21 @@ async function handleRequest() {
   }
 }
 
-
 window.addEventListener("load", function () {
+  switchToMenuPage();
+});
 
-    switchToMenuPage()
+export function switchToMenuPage() {
+  const menuScript = new MenuScript();
 
-  });
+  menuScript.LoadMenuPage();
 
-  function switchToMenuPage(){
-    const menuScript = new MenuScript();
+  const startButton = document.getElementById("start-button");
 
-    menuScript.LoadMenuPage();
-  
-    const startButton = document.getElementById("start-button");
-  
-    startButton.addEventListener("click", switchToGamePage);
-  }
+  startButton.addEventListener("click", switchToGamePage);
+}
 
 async function switchToGamePage() {
-    
   gameScript.LoadGamePage();
   gameScript.handleQuizData(await handleRequest());
 
@@ -43,15 +40,10 @@ async function switchToGamePage() {
     switchToMenuPage();
   });
 
-
   const next = document.getElementById("next-button");
-  next.addEventListener("click", function(){
-    console.log("Test")
-    
-    gameScript.handleAnswerSubmission(null ,'Skip');
+  next.addEventListener("click", function () {
+    console.log("Test");
+
+    gameScript.handleAnswerSubmission(null, "Skip");
   });
-
-
 }
-
-

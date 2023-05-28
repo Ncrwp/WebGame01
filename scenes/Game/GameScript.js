@@ -1,10 +1,11 @@
 import { Popup } from '../../components/Popup.js';
 import { GameHtml } from "../../scenes/Game/GameHTML.js";
-
+import { switchToMenuPage } from '../../index.js';
 
 export class GameScript {
   constructor() {
     this.gameUi = new GameHtml;
+    this.endGame = switchToMenuPage;
     this.responseData = {}
     this.currentQuestionIndex = 0;
     this.currentScore = 1;
@@ -126,8 +127,8 @@ export class GameScript {
         this.createQuestion(question, answers, response.results.length);
       } else {
 
-        popup.showPopup("Done");
-        
+        popup.showPopup("Quiz finished");
+        this.endGame()
         console.log("Quiz finished");
       }
     }, 2000);

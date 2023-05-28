@@ -4,6 +4,6 @@
 - [*] Disable all buttons once a user clicks on an option to prevent multiple clicks.
 - [*] Keep track of the user's score and display the number of incorrect answers at the end of each round.
 - [*] Show the correct answer when the user selects an incorrect option.
-- [ ] End of game message and options.
+- [*] End of game message and options.
 - [*] Landing page.
 
