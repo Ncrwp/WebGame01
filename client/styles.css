@@ -1,44 +1,80 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #eaeaea;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #eaeaea;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 60vh;
+  /* Set a minimum height */
+  width: 75vh;
+  /* Set a minimum height */
+
+  box-sizing: border-box;
+  /* Include padding in the total size */
+  overflow: hidden;
+  /* Limit the size of the content */
   
-  .container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    height: 60vh; /* Set a minimum height */
-    width: 75vh; /* Set a minimum height */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-    box-sizing: border-box; /* Include padding in the total size */
-    overflow: hidden; /* Limit the size of the content */
-  }
 
-  .page {
-    display: none;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    height: 60vh; /* Set a minimum height */
-    width: 75vh; /* Set a minimum height */
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
-    box-sizing: border-box; /* Include padding in the total size */
-    overflow: hidden; /* Limit the size of the content */
-  }
+.middle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.page {
+  display: none;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 60vh;
+  /* Set a minimum height */
+  width: 75vh;
+  /* Set a minimum height */
+
+  box-sizing: border-box;
+  /* Include padding in the total size */
+  overflow: hidden;
+  /* Limit the size of the content */
+}
 
 .slide-in {
   display: flex;
@@ -46,7 +82,7 @@ body {
 }
 
 .slide-out {
-  display: flex;
+  display: none;
   animation: slide-out 1s ease-in-out;
 }
 
@@ -55,6 +91,7 @@ body {
     transform: translateX(-100%);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -66,138 +103,138 @@ body {
     transform: translateX(0);
     opacity: 1;
   }
+
   100% {
     transform: translateX(100%);
     opacity: 0;
   }
 }
 
-  
-  @media screen and (max-width: 768px) {
-    /* Adjust the container size for smaller screens */
-    .container {
-      min-height: 150px;
-      min-width: 150px;
+.question {
+  font-weight: bold;
+  margin: 16px auto;
+  width: auto;
 
-      padding: 10px;
-    }
-  }
-  
-  #question-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
+}
 
-    box-sizing: border-box; /* Include padding in the total size */
-    overflow: hidden; /* Limit the size of the content */
-  }
+form {
+  text-align: left;
+  height: 100%;
+  padding-top: 16px;
+}
 
-  .question {
-    font-weight: bold;
-    margin: 16px auto;
-    width: auto;
+form label,
+form input,
+form select,
+form textarea {
+  margin-bottom: 10px;
+}
 
-  }
-  
-  form {
-    text-align: left;
-    height: 100%;
-    padding-top: 16px;
-  }
-  
-  form label,
-  form input,
-  form select,
-  form textarea {
-    margin-bottom: 10px;
-  }
 
-  #submit-button {
-    width: fit-content;
-    margin: 0 auto;
-  }
 
-  #score-counter {
-    text-align: left;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 5px;
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-left: 75%;
-  }
-  
+#score-counter {
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  margin-left: 75%;
+}
 
-  .popup {
-    /* Your existing styles for the popup */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: lightgray;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    display: none; /* Hide initially */
-    z-index: 9999; /* Set a high z-index value to appear above other elements */
-  }
-  
-  .blur-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the desired opacity */
-    backdrop-filter: blur(5px); /* Apply the blur effect to the background */
-    z-index: 9998; /* Set a lower z-index value than the popup */
-    display: none; /* Hide initially */
-  }
-  
-  #loading-component {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #ffffff;
-  }
-  
-  .loading-spinner {
-    border: 8px solid #ffffff;
-    border-top: 8px solid #000;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .loading-text {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .button-container {
-    margin-right: 10px;
-  }
-  
-  .heading-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  display: none;
+  /* Hide initially */
+  z-index: 9999;
+  /* Set a high z-index value to appear above other elements */
+}
+
+.blur-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Adjust the desired opacity */
+  backdrop-filter: blur(5px);
+  /* Apply the blur effect to the background */
+  z-index: 9998;
+  /* Set a lower z-index value than the popup */
+  display: none;
+  /* Hide initially */
+}
+
+#loading-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.loading-spinner {
+  border: 8px solid #ffffff;
+  border-top: 8px solid #000;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
 
-  .heading-title {
-    width: 100%;
+  100% {
+    transform: rotate(360deg);
   }
+}
+
+.loading-text {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.button-container {
+  margin-right: 10px;
+}
+
+.heading-title {
+  width: 100%;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.button:hover {
+  background-color: #000;
+  color: #fff;
+}
+

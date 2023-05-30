@@ -7,12 +7,126 @@
 </head>
 
 <body>
-    
-    <div id="content" class="container">
+
+    <div class="popup">
+        <p class="title"></p>
+        <p class="message"></p>
+    </div>
+
+    <div id="blur-background" class="blur-background"></div>
+
+    <div class="container">
+
+        <div id="register" class="page">
+
+            <div class="top-container">
+                <div class="button-container">
+                    <button  class="button" class="button" id="back-button">Home</button>
+                </div>
+                <div class="heading-title">
+                    <h1>Register</h1>
+                </div>
+            </div>
+            <div class="middle-container">
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <button  class="button" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bottom-container"></div>
+
+        </div>
+
+        <div id="login" class="page">
+            <div class="top-container">
+                <div class="button-container">
+                    <button  class="button" class="button" class="button" id="login-back-button">Home</button>
+                </div>
+                <div class="heading-title">
+                    <h1>Log In</h1>
+                </div>
+            </div>
+            <div class="middle-container">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="login-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <button  class="button" type="submit">Log in</button> 
+                    </div>
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div id="home" class="page">
+            <div class="top-container">
+                <div class="heading-title">
+                    <h1>Menu</h1>
+                </div>
+            </div>
+
+            <div class="middle-container">
+                <div id="button-container">
+
+                    <button  class="button" class="button" id="start-button">Start</button>
+                    <button  class="button" class="button" id="register-button">Register</button>
+                    <button  class="button" class="button" id="login-button">Log In</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="game" class="page">
+
+            <div class="top-container">
+                <div class="button-container">
+                    <button  class="button" class="button" id="home-button">Home</button>
+                </div>
+                <div class="heading-title">
+                    <h1>Quiz</h1>
+                </div>
+                <div class="button-container">
+                    <button  class="button" class="button" id="next-button">Skip</button>
+                </div>
+            </div>
+
+            <div id="question-container" class="middle-container">
+                <p id="question-counter"></p>
+                <form id="quiz-form">
+
+                </form>
+                <button  class="button" class="button" id="submit-button">Submit</button>
+            </div>
+
+            <div class="bottom-container">
+                <div id="score-counter">Points 0</div>
+            </div>
+
+        </div>
 
     </div>
-    
+
 </body>
-<script src="index.js" type="module"></script>
+<script src="script.js"></script>
 
 </html>

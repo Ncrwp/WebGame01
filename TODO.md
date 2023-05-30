@@ -6,5 +6,5 @@
 - [*] Show the correct answer when the user selects an incorrect option.
 - [*] End of game message and options.
 - [*] Landing page.
-- [ ] Backend.
+- [*] Backend.
 - [ ] Save score to user.
