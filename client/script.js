@@ -1,6 +1,9 @@
-let apiUrl = "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
+let apiUrl =
+  "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
 let pageIndex;
 let responseData;
+let currentQuestionIndex = 0;
+let currentScore = 1;
 
 // #region Region 1: Starting Code
 window.addEventListener("load", function () {
@@ -16,13 +19,9 @@ function switchToMenuPage() {
   const registerButton = document.getElementById("register-button");
   const loginButton = document.getElementById("login-button");
 
-
-
   startButton.addEventListener("click", switchToGamePage);
   registerButton.addEventListener("click", switchToRegisterPage);
   loginButton.addEventListener("click", switchToLoginPage);
-
-
 }
 
 function switchToRegisterPage() {
@@ -33,9 +32,7 @@ function switchToRegisterPage() {
 
   const back = document.getElementById("back-button");
   back.addEventListener("click", function () {
-
     switchToMenuPage();
-    
   });
 }
 
@@ -47,9 +44,7 @@ function switchToLoginPage() {
 
   const back = document.getElementById("login-back-button");
   back.addEventListener("click", function () {
-
     switchToMenuPage();
-    
   });
 }
 
@@ -60,14 +55,11 @@ async function switchToGamePage() {
 
   const home = document.getElementById("home-button");
   home.addEventListener("click", function () {
-
     switchToMenuPage();
-
   });
 
   const next = document.getElementById("next-button");
   next.addEventListener("click", function () {
-
     handleAnswerSubmission(null, "Skip");
   });
 }
@@ -75,8 +67,6 @@ async function switchToGamePage() {
 
 // #region Region 3: Background Code
 function LoadPage(page) {
-  currentQuestionIndex = 0;
-
   if (!!pageIndex) {
     const prevPage = document.getElementById(pageIndex);
 
@@ -92,7 +82,6 @@ function LoadPage(page) {
   nextPage.classList.add("slide-in");
 
   pageIndex = page;
-
 }
 
 function showPopup(title, message) {
@@ -102,23 +91,21 @@ function showPopup(title, message) {
   document.querySelector(".message").innerHTML = message;
 
   document.querySelector(".blur-background").style.display = "block";
-}
 
-function hidePopup() {
-  document.querySelector(".popup").style.display = "none";
-  document.querySelector(".blur-background").style.display = "none";
+  setTimeout(() => {
+    document.querySelector(".popup").style.display = "none";
+    document.querySelector(".blur-background").style.display = "none";
+  }, 2000);
 }
 // #endregion
 
 // #region Region 4: Game Code
 async function handleRequest() {
   try {
-    showPopup("Loading...","");
+    showPopup("Loading...", "");
 
     var response = await fetch(apiUrl);
     var data = await response.json();
-
-    hidePopup();
 
     return await data;
   } catch (error) {
@@ -176,7 +163,13 @@ function createQuestionElement(question) {
 }
 
 function handleQuizData(response) {
+
   if (response.results.length > 0) {
+    currentQuestionIndex = 0
+
+    console.log(response.results.length)
+
+
     responseData = response;
 
     let firstQuestion = responseData.results[0];
@@ -192,13 +185,10 @@ function handleQuizData(response) {
     const submitButton = document.getElementById("submit-button");
     submitButton.addEventListener("click", (event) => {
       event.preventDefault();
-      handleAnswerSubmission(responseData);
+      handleAnswerSubmission(responseData, );
     });
   }
 }
-
-let currentQuestionIndex = 0;
-let currentScore = 1;
 
 function handleAnswerSubmission(response, param) {
   const scoreCounter = document.getElementById("score-counter");
@@ -236,36 +226,28 @@ function handleAnswerSubmission(response, param) {
     );
   }
 
-  if (currentQuestionIndex == response.results.length - 1 ) {
+  currentQuestionIndex++; // Move to the next question
+
+  if (currentQuestionIndex < response.results.length) {
+    // More questions are available
+    let question = response.results[currentQuestionIndex].question;
+    let answers = response.results[
+      currentQuestionIndex
+    ].incorrect_answers.concat(
+      response.results[currentQuestionIndex].correct_answer
+    );
+
+    createQuestion(question, answers, response.results.length);
+  } else {
     showPopup("Quiz finished", "");
+
+    switchToMenuPage();
   }
-
-  setTimeout(() => {
-    hidePopup();
-    currentQuestionIndex++; // Move to the next question
-
-    if (currentQuestionIndex < response.results.length) {
-      // More questions are available
-      let question = response.results[currentQuestionIndex].question;
-      let answers = response.results[
-        currentQuestionIndex
-      ].incorrect_answers.concat(
-        response.results[currentQuestionIndex].correct_answer
-      );
-
-      createQuestion(question, answers, response.results.length);
-    } else {
-
-      switchToMenuPage();
-
-    }
-  }, 2000);
 }
 // #endregion
 
 // #region Region 5: Register Code
 function registerUser(data) {
-
   fetch("http://localhost:3000/register", {
     method: "POST",
     headers: {
@@ -276,14 +258,8 @@ function registerUser(data) {
     .then((response) => response.json())
     .then((result) => {
       console.log("Registration successful:", result);
-      showPopup("Registered","");
-      setTimeout(() => {
-
-        hidePopup();
-        switchToMenuPage();
-
-      }, 2000);
-
+      showPopup("Registered", "");
+      switchToMenuPage();
     })
     .catch((error) => {
       console.error("Registration failed:", error);
@@ -292,77 +268,79 @@ function registerUser(data) {
 
 function handleRegistrationForm(event) {
   event.preventDefault(); // Prevent the default form submission
-  
-  let form = document.getElementById('registration-form');
-  let usernameInput = document.getElementById('username');
-  let passwordInput = document.getElementById('password');
-  
+
+  let form = document.getElementById("registration-form");
+  let usernameInput = document.getElementById("username");
+  let passwordInput = document.getElementById("password");
+
   let username = usernameInput.value;
   let password = passwordInput.value;
   let score = 0;
-  
+
   let userData = {
     username: username,
     password: password,
-    score: score
+    score: score,
   };
 
   registerUser(userData);
-  
 }
 // #endregion
 
 // #region Region 7: Log In Code
-function loginUser(data) {
-  fetch("http://localhost:3000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      console.log("Login successful:", result);
-      showPopup("Logged in successfully", "");
-      setTimeout(() => {
+async function loginUser(data) {
 
-        hidePopup();
-      }, 2000);
+
+  try {
+    showPopup("Loading...", "");
+
+    let response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     })
-    .catch((error) => {
-      console.error("Login failed:", error);
-    });
+
+    var data = await response.json();
+
+    return await data;
+  } catch (error) {
+    console.log("An error occurred:", error);
+  }
+
 }
 
-function handleLoginForm(event) {
+async function handleLoginForm(event) {
   event.preventDefault(); // Prevent the default form submission
-  
-  let form = document.getElementById('login-form');
-  let usernameInput = document.getElementById('login-username');
-  let passwordInput = document.getElementById('login-password');
-  
+
+  let form = document.getElementById("login-form");
+  let usernameInput = document.getElementById("login-username");
+  let passwordInput = document.getElementById("login-password");
+
   let username = usernameInput.value;
   let password = passwordInput.value;
-  
+
   let userData = {
     username: username,
-    password: password
+    password: password,
   };
 
-  loginUser(userData);
-  
+  var result = await loginUser(userData);
+  showPopup(result.message, "Hi " + result.user["username"] )
+  currentScore = result.user["score"]
+  switchToMenuPage();
 }
 // #endregion
 
-// #region Region 8: Log In Code
+// #region Region 8:
 // #endregion
 
-// #region Region 9: Log In Code
+// #region Region 9:
 // #endregion
 
-// #region Region 10: Log In Code
+// #region Region 10:
 // #endregion
 
-// #region Region 11: Log In Code
+// #region Region 11:
 // #endregion
